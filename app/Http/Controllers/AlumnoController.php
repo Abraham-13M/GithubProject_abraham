@@ -26,12 +26,15 @@ class AlumnoController extends Controller
 
     public function index(): View {
         //
-        return view('index', []);
+        //$alumnos = 'select * from alumno';
+        $alumnos = Alumno::all();
+        //dd($alumnos);
+        return view('alumno.index', ['alumnos' => $alumnos]);
     }
         
     public function show(Alumno $alumno): View {
-        //
-        return view('index', []);
+        dd($alumno);
+        return view('alumno.show', ['alumno' => $alumno]);
     }
         
     /*public function store(Request $request): RedirectResponse {
@@ -40,6 +43,7 @@ class AlumnoController extends Controller
     }*/
     function store(Request $request) {
         //dd($request->all());
+        //protected $fillable = ['nombre', 'apellidos', 'fnac', 'genero', 'nacceso'];
         $alumno = new Alumno($request->all());
         /*$alumno->nombre = $request->nombre;
         $alumno->apellidos = $request->apellidos;
