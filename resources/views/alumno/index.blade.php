@@ -1,5 +1,15 @@
 @extends('template.base')
 
+@section('before-content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <a href="{{ route('alumno.create') }}" class="btn btn-secondary">Create</a>
+        </div>
+    </div>
+</div>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -15,8 +25,14 @@
                         <td>{{ $alumno->nacceso }}</td>
                         <td>
                             <a href="{{ route('alumno.show', $alumno) }}" class="btn btn-secondary">View</a>
-                            <a href="{{ route('index') }}" class="btn btn-secondary">Edit</a>
-                            <a href="{{ route('index') }}" class="btn btn-secondary">Delete</a>
+                            <a href="{{ route('alumno.edit', $alumno) }}" class="btn btn-secondary">Edit</a>
+                            <!--<a href="{{ route('index') }}" class="btn btn-secondary">Delete</a>-->
+                            <form data-message="{{ $alumno->apellidos . ', ' . $alumno->nombre }}" class="confirm-dialog" action="{{ route('alumno.destroy', $alumno) }}" method="post" style="display: inline;">
+                                @csrf
+                                @method('delete')
+                                <input type="submit" value="Delete" class="btn btn-secondary">
+                                <!--<button type="submit" class="btn btn-secondary">Delete</button>-->
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -24,4 +40,19 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    document.querySelectorAll('form.confirm-dialog').forEach(
+        form => {
+            form.addEventListener('submit', e => {
+                const message = '¿Seguro que quieres borrar al alumno ' + form.dataset.message + '?';
+                if(!confirm(message)) {
+                    e.preventDefault();
+                }
+            });
+        }
+    );
+</script>
 @endsection
