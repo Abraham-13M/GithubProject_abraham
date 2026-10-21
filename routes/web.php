@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfesorController;
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('about', [MainController::class, 'about'])->name('about');
@@ -19,3 +20,13 @@ Route::get('alumno', [AlumnoController::class, 'index'])->name('alumno.index');
 Route::put('alumno/{alumno}', [AlumnoController::class, 'update'])->name('alumno.update');
 Route::get('alumno/{alumno}', [AlumnoController::class, 'show'])->name('alumno.show');
 Route::delete('alumno/{alumno}', [AlumnoController::class, 'destroy'])->name('alumno.destroy');
+
+// para los profesores
+
+Route::get('/profesor', [ProfesorController::class, 'index'])->name('profesor.index');
+Route::get('/profesor/create', [ProfesorController::class, 'create'])->name('profesor.create');
+Route::post('/profesor', [ProfesorController::class, 'store'])->name('profesor.store');
+Route::get('/profesor/{profesor}', [ProfesorController::class, 'show'])->name('profesor.show');
+Route::get('/profesor/{profesor}/edit', [ProfesorController::class, 'edit'])->name('profesor.edit');
+Route::put('/profesor/{profesor}', [ProfesorController::class, 'update'])->name('profesor.update');
+Route::delete('/profesor/{profesor}', [ProfesorController::class, 'destroy'])->name('profesor.destroy');
