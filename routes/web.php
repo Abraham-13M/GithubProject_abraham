@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ModuloController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfesorController;
 
@@ -21,6 +22,7 @@ Route::put('alumno/{alumno}', [AlumnoController::class, 'update'])->name('alumno
 Route::get('alumno/{alumno}', [AlumnoController::class, 'show'])->name('alumno.show');
 Route::delete('alumno/{alumno}', [AlumnoController::class, 'destroy'])->name('alumno.destroy');*/
 Route::resource('alumno', AlumnoController::class);
+Route::resource('modulo', ModuloController::class);
 
 // para los profesores
 
